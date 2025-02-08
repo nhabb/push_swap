@@ -51,13 +51,13 @@ bool	input_to_stack(int argc, char **argv, t_stack_node **stack_a)
 		if (extra_cases(argv[i]))
 		{
 			ft_printf("ERROR2\n");
-			return (true);
+			exit (1);
 		}
 		success = new_atoi(argv[i], &input);
 		if (!success)
         {
             ft_printf("ERRORxfgdfg\n");
-            return true;
+            exit (1);
         }
 		correct_order(stack_a, input);
 		i++;
