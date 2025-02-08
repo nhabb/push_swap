@@ -74,11 +74,6 @@ void	add_cost_of_a_and_b(t_stack_node*stack_a, t_stack_node **stack_b)
 }
 void	pre_sort(t_stack_node **stack_a, t_stack_node **stack_b)
 {
-	int nodes_a;
-	int nodes_b;
-
-	nodes_a = count_nodes(*stack_a);
-	nodes_b = count_nodes(*stack_b);
 	assign_indices(*stack_a);
 	assign_indices(*stack_b);
 	set_target_node_a (*stack_a, *stack_b);
@@ -190,12 +185,12 @@ void sort(t_stack_node **stack_a, t_stack_node **stack_b)
         pb(stack_a, stack_b);
     }
     find_max_bb(stack_b);
-    while (stack_b != NULL)
-    {
-        pa(stack_a, stack_b);
-    }
-    // print_stack(*stack_b);
-	// printf("\n");
+    // while (stack_b != NULL)
+    // {
+    //     pa(stack_a, stack_b);
+    // }
+    print_stack(*stack_b);
+	printf("\n");
 	free_list(*stack_a);
 	free_list(*stack_b);
 }

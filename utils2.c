@@ -128,20 +128,18 @@ void	free_main(t_stack_node *stack_a, t_stack_node *stack_b)
 void assign_indices(t_stack_node *stack)
 {
     int index = 0;
-	t_stack_node *node;
-	node = stack;
 	int count = count_nodes(stack);
     while (stack != NULL)
     {
-		// if(count >= count/2)
-		// {
-		// 	stack->median = 1;
-		// }
-		// else
-		// {
-		// 	stack->median = 0;
-		// }
-		// stack->median = 0;
+		if(count >= count/2)
+		{
+			stack->median = 1;
+		}
+		else
+		{
+			stack->median = 0;
+		}
+		stack->median = 0;
         stack->index = index;
         stack = stack->next;
         index++;
