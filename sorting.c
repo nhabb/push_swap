@@ -74,11 +74,6 @@ void	add_cost_of_a_and_b(t_stack_node*stack_a, t_stack_node **stack_b)
 }
 void	pre_sort(t_stack_node **stack_a, t_stack_node **stack_b)
 {
-	int nodes_a;
-	int nodes_b;
-
-	nodes_a = count_nodes(*stack_a);
-	nodes_b = count_nodes(*stack_b);
 	assign_indices(*stack_a);
 	assign_indices(*stack_b);
 	set_target_node_a (*stack_a, *stack_b);
@@ -125,7 +120,7 @@ void	find_max_bb(t_stack_node  **stack_b)
     //         return;
     //     }
     //     print_stack(*stack_b);
-	 max = find_max_pointer(*stack_b);
+	max = find_max_pointer(*stack_b);
 	assign_indices(*stack_b);
 	while (max->index != 0)
 	{
@@ -171,15 +166,15 @@ void sort(t_stack_node **stack_a, t_stack_node **stack_b)
         pre_sort(stack_a, stack_b);
 		
         cheap = cheapest_node(*stack_a, *stack_b, total_a, total_b);
-            if (cheap->median == 0 && cheap->target->median == 0)
+			if (cheap->median == 1 && cheap->target->median == 1)
+				rotate_a_b(stack_a, stack_b, cheap);
+            else if (cheap->median == 0 && cheap->target->median == 0)
                 reverse_rotate_a_and_b(stack_a, stack_b, cheap);
 			else if(cheap->median == 1 && cheap->target->median == 0)
 			{
 				ra(stack_a);
 				rrb(stack_b);
 			}
-            else if (cheap->median == 1 && cheap->target->median == 1)
-                rotate_a_b(stack_a, stack_b, cheap);
 			else if (cheap->median == 0 && cheap->target->median == 1)
 			{
 				rra(stack_a);
@@ -190,12 +185,13 @@ void sort(t_stack_node **stack_a, t_stack_node **stack_b)
         pb(stack_a, stack_b);
     }
     find_max_bb(stack_b);
-    while (stack_b != NULL)
-    {
-        pa(stack_a, stack_b);
-    }
-    // print_stack(*stack_b);
-	// printf("\n");
+    // while (stack_b != NULL)
+    // {
+    //     pa(stack_a, stack_b);
+	// 	(*stack_b) = (*stack_b)->next;
+    // }
+    print_stack(*stack_b);
+	printf("\n");
 	free_list(*stack_a);
 	free_list(*stack_b);
 }
