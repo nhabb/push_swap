@@ -1,6 +1,6 @@
 # Compiler and flags
 CC = gcc
-CFLAGS = -g
+CFLAGS = -Wall -Wextra -Werror -g -Wno-dev
 
 # Directories
 LIBFT_DIR = libft
