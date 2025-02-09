@@ -142,6 +142,8 @@ void assign_indices(t_stack_node *stack)
 		stack->median = 0;
         stack->index = index;
         stack = stack->next;
+		// print_stack(stack);
+		// printf("\n");
         index++;
     }
 }

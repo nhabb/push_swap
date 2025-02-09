@@ -161,36 +161,46 @@ void sort(t_stack_node **stack_a, t_stack_node **stack_b)
     pb(stack_a, stack_b);
     while (count_nodes(*stack_a) > 0)
     {
+		// printf("stack a:");
+		// print_stack(*stack_a);
+		// printf("\n");
 		total_a = count_nodes(*stack_a);
         total_b = count_nodes(*stack_b);
         pre_sort(stack_a, stack_b);
 		
         cheap = cheapest_node(*stack_a, *stack_b, total_a, total_b);
-            if (cheap->median == 0 && cheap->target->median == 0)
-                reverse_rotate_a_and_b(stack_a, stack_b, cheap);
-			else if(cheap->median == 1 && cheap->target->median == 0)
-			{
-				ra(stack_a);
-				rrb(stack_b);
-			}
-            else if (cheap->median == 1 && cheap->target->median == 1)
-                rotate_a_b(stack_a, stack_b, cheap);
-			else if (cheap->median == 0 && cheap->target->median == 1)
-			{
-				rra(stack_a);
-				rb(stack_b);
-			}
+		if (cheap->median == 0 && cheap->target->median == 0)
+		reverse_rotate_a_and_b(stack_a, stack_b, cheap);
+		else if(cheap->median == 1 && cheap->target->median == 0)
+		{
+			ra(stack_a);
+			rrb(stack_b);
+		}
+		else if (cheap->median == 1 && cheap->target->median == 1)
+		rotate_a_b(stack_a, stack_b, cheap);
+		else if (cheap->median == 0 && cheap->target->median == 1)
+		{
+			rra(stack_a);
+			rb(stack_b);
+		}
         put_node_on_top_a(stack_a, cheap);
+		// printf("Putting node on top of B:");
         put_node_on_top_b(stack_b, cheap);
         pb(stack_a, stack_b);
+		if (total_a == 3)
+			sort_three(stack_a);
+		// printf("stack b:");
+		// print_stack(*stack_b);
+		// printf("\n");
     }
-    find_max_bb(stack_b);
+	find_max_bb(stack_b);
+	// printf("stack b:");
+	// print_stack(*stack_b);
+	// printf("\n");
     // while (stack_b != NULL)
     // {
     //     pa(stack_a, stack_b);
     // }
-    print_stack(*stack_b);
-	printf("\n");
 	free_list(*stack_a);
 	free_list(*stack_b);
 }

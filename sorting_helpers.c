@@ -3,24 +3,47 @@
 
 void	rotate_a_b(t_stack_node **stack_a, t_stack_node **stack_b, t_stack_node *cheap)
 {
-	while (cheap->index != 0 && cheap->target->index != 0)
+	while (cheap->index != 0 || cheap->target->index != 0)
 	{
 		rr(stack_a, stack_b);
 		assign_indices(*stack_a);
 		assign_indices(*stack_b);
 	}
-}
-
-void	reverse_rotate_b(t_stack_node **stack_a, t_stack_node **stack_b,
-		t_stack_node *cheapest)
-{
-	while (cheapest->index != 0 && cheapest->target->index != 0)
+	while (cheap->index != 0)
 	{
-		rrr(stack_a, stack_b);
+		ra(stack_a);
 		assign_indices(*stack_a);
+	}
+	while (cheap->target->index != 0)
+	{
+		// printf ("Hello");
+		rb(stack_b);
 		assign_indices(*stack_b);
 	}
 }
+
+// void	reverse_rotate_b(t_stack_node **stack_a, t_stack_node **stack_b,
+// 		t_stack_node *cheapest)
+// {
+// 	while (cheapest->index != 0 || cheapest->target->index != 0)
+// 	{
+		
+// 		rrr(stack_a, stack_b);
+// 		assign_indices(*stack_a);
+// 		assign_indices(*stack_b);
+// 	}
+// 	while (cheapest->index != 0)
+// 	{
+// 		rrb(stack_b);
+// 		assign_indices(*stack_a);
+// 	}
+// 	while (cheapest->target->index != 0)
+// 	{
+// 		// printf ("Hello");
+// 		rrb(stack_b);
+// 		assign_indices(*stack_b);
+// 	}
+// }
 
 
 
@@ -46,6 +69,8 @@ void	put_node_on_top_b(t_stack_node **stack_b, t_stack_node *cheapest)
 	{
 		if (cheapest->target->median == 1)
 		{
+			printf ("Hello");
+
 			rb(stack_b);
 		}
 		else
@@ -61,6 +86,17 @@ void	reverse_rotate_a_and_b(t_stack_node **stack_a, t_stack_node **stack_b,
 	{
 		rrr(stack_a, stack_b);
 		assign_indices(*stack_a);
+		assign_indices(*stack_b);
+	}
+	while (cheapest->index != 0)
+	{
+		rra(stack_a);
+		assign_indices(*stack_a);
+	}
+	while (cheapest->target->index != 0)
+	{
+		// printf ("Hello");
+		rrb(stack_b);
 		assign_indices(*stack_b);
 	}
 }
