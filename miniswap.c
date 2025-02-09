@@ -33,7 +33,7 @@ void	sort_three_helper(t_stack_node **stack_a, long long int first,
 		rra(stack_a);
 }
 
-t_stack_node	*sort_three(t_stack_node **stack_a)
+void	sort_three(t_stack_node **stack_a)
 {
 	t_stack_node	*temp;
 	long long int				first;
@@ -42,12 +42,48 @@ t_stack_node	*sort_three(t_stack_node **stack_a)
 
 	temp = *stack_a;
 	if (!temp || !temp->next || !temp->next->next)
-		return (*stack_a);
+		return ;
 	first = temp->data;
 	second = temp->next->data;
 	third = temp->next->next->data;
 	sort_three_helper(stack_a, first, second, third);
-	return (*stack_a);
+}
+
+void put_min_on_top(t_stack_node **stack_a)
+{
+    t_stack_node *min_node;
+
+    if (!stack_a || !(*stack_a))
+        return;
+
+    min_node = find_min_b(stack_a);
+
+    while (*stack_a != min_node)
+    {
+        if (min_node->index <= (count_nodes(*stack_a) / 2))
+            ra(stack_a);
+        else
+            rra(stack_a);
+    }
+}
+
+
+void sort_four(t_stack_node **stack_a,t_stack_node **stack_b)
+{
+	int nodes;
+	t_stack_node *cur;
+
+	cur = (*stack_a);
+	nodes = count_nodes(*stack_a);
+	if (nodes == 4)
+	{
+		cur->min = find_min_b(&cur);
+		put_min_on_top(&cur->min);
+		nodes--;
+	}
+	pb(&cur,stack_b);
+	sort_three(&cur);
+	pa(stack_a,stack_b);
 }
 
 void	push_to_b(t_stack_node **stack_a, t_stack_node **stack_b)
