@@ -11,17 +11,17 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-void set_target_node_a(t_stack_node *stack_a, t_stack_node *node)
+void set_target_node_a(t_stack_node **stack_a, t_stack_node **node)
 {
     int closest_smaller = INT_MIN;  // Holds the closest smaller value
     t_stack_node *temp = NULL;      // Tracks the potential target node
-    t_stack_node *current = stack_a;
+    t_stack_node *current = (*stack_a);
 
     // Iterate through stack_a
     while (current != NULL)
     {
         // Check if current node's data is less than node's data and greater than closest_smaller
-        if (current->data < node->data && current->data > closest_smaller)
+        if (current->data < (*node)->data && current->data > closest_smaller)
         {
             closest_smaller = current->data;
             temp = current;
@@ -31,9 +31,9 @@ void set_target_node_a(t_stack_node *stack_a, t_stack_node *node)
 
     // If no smaller element was found, set target to the maximum node in stack_a
     if (temp == NULL)
-        node->target = find_max_b(&stack_a);
+        (*node)->target = find_max_b(stack_a);
     else
-        node->target = temp;
+        (*node)->target = temp;
 }
 
 void	find_cost(t_stack_node *head)
@@ -50,33 +50,33 @@ void	find_cost(t_stack_node *head)
 		head = head->next;
 	}
 }
-void	add_cost_of_a_and_b(t_stack_node*stack_a, t_stack_node **stack_b)
+void	add_cost_of_a_and_b(t_stack_node **stack_a, t_stack_node **stack_b)
 {
 	t_stack_node	*temp;
 
 	temp = *stack_b;
-	set_target_node_a (stack_a, *stack_b);
+	set_target_node_a (stack_a, stack_b);
 
 	while (stack_a != NULL)
 	{
 		temp = *stack_b;
 		while (temp != NULL)
 		{
-			if (stack_a->target== temp)
+			if ((*stack_a)->target== temp)
 			{
-				stack_a->cost += temp->cost;
+			(*stack_a)->cost += temp->cost;
 				break ;
 			}
 			temp = temp->next;
 		}
-		stack_a = stack_a->next;
+		(*stack_a) = (*stack_a)->next;
 	}
 }
 void	pre_sort(t_stack_node **stack_a, t_stack_node **stack_b)
 {
 	assign_indices(*stack_a);
 	assign_indices(*stack_b);
-	set_target_node_a (*stack_a, *stack_b);
+	set_target_node_a (stack_a, stack_b);
     find_cost(*stack_a);
     find_cost(*stack_b);
     // add_cost_of_a_and_b(*stack_a, stack_b);
@@ -120,7 +120,7 @@ void	find_max_bb(t_stack_node  **stack_b)
     //         return;
     //     }
     //     print_stack(*stack_b);
-	 max = find_max_pointer(*stack_b);
+	max = find_max_pointer(*stack_b);
 	assign_indices(*stack_b);
 	while (max->index != 0)
 	{
@@ -168,6 +168,7 @@ void sort(t_stack_node **stack_a, t_stack_node **stack_b)
         total_b = count_nodes(*stack_b);
         pre_sort(stack_a, stack_b);
 		
+<<<<<<< HEAD
         cheap = cheapest_node(*stack_a, *stack_b, total_a, total_b);
 		if (cheap->median == 0 && cheap->target->median == 0)
 		reverse_rotate_a_and_b(stack_a, stack_b, cheap);
@@ -183,6 +184,23 @@ void sort(t_stack_node **stack_a, t_stack_node **stack_b)
 			rra(stack_a);
 			rb(stack_b);
 		}
+=======
+        cheap = cheapest_node(stack_a, stack_b, total_a, total_b);
+			if (cheap->median == 1 && cheap->target->median == 1)
+				rotate_a_b(stack_a, stack_b, cheap);
+            else if (cheap->median == 0 && cheap->target->median == 0)
+                reverse_rotate_a_and_b(stack_a, stack_b, cheap);
+			else if(cheap->median == 1 && cheap->target->median == 0)
+			{
+				ra(stack_a);
+				rrb(stack_b);
+			}
+			else if (cheap->median == 0 && cheap->target->median == 1)
+			{
+				rra(stack_a);
+				rb(stack_b);
+			}
+>>>>>>> dev
         put_node_on_top_a(stack_a, cheap);
 		// printf("Putting node on top of B:");
         put_node_on_top_b(stack_b, cheap);
@@ -200,6 +218,7 @@ void sort(t_stack_node **stack_a, t_stack_node **stack_b)
     // while (stack_b != NULL)
     // {
     //     pa(stack_a, stack_b);
+	// 	(*stack_b) = (*stack_b)->next;
     // }
 	free_list(*stack_a);
 	free_list(*stack_b);

@@ -26,17 +26,18 @@ typedef struct list_node
 	int					cost;
 	int					median;
 	long long int					number;
+	struct list_node 				*min;
 	struct list_node	*next;
 	struct list_node	*prev;
 	struct list_node	*target;
 }						t_stack_node;
 void	find_cost(t_stack_node *head);
-void	add_cost_of_a_and_b(t_stack_node*stack_a, t_stack_node **stack_b);
+void	add_cost_of_a_and_b(t_stack_node **stack_a, t_stack_node **stack_b);
 int				count_nodes(t_stack_node *stack_a);
 bool			new_atoi(const char *nptr, long long int *ftatoi);
 int 			calculate_rotation_cost(int index, int total_nodes);
-int 			calculate_combined_cost(t_stack_node *node_a, t_stack_node *node_b, 
-						int total_nodes_a, int total_nodes_b);
+int	calculate_combined_cost(t_stack_node **node_a, t_stack_node **node_b,
+	int total_nodes_a, int total_nodes_b);
 int 			max_cost(int cost1, int cost2);
 int findPos(t_stack_node *node,t_stack_node **stack_a);
 void			print_stack(t_stack_node *head);
@@ -57,8 +58,8 @@ bool			input_to_stack(int argc, char **argv, t_stack_node **stack_a);
 void			correct_order(t_stack_node	**stack_a, long long int input);
 void			push_to_b(t_stack_node **stack_a, t_stack_node **stack_b);
 void	sort_three_helper(t_stack_node **stack_a, long long int first,
-			long long int second,long long int third);
-void			set_target_node_a(t_stack_node *s, t_stack_node *node);
+long long int second,long long int third);
+void set_target_node_a(t_stack_node **stack_a, t_stack_node **node);
 void			free_main(t_stack_node *stack_a, t_stack_node *stack_b);
 void 			assign_indices(t_stack_node *stack);
 void			quoted_args(const char *str);
@@ -85,10 +86,11 @@ bool			numerical_param(char *arg);
 bool			extra_cases(char *arg);
 t_stack_node			*create_new_node(int number);
 t_stack_node	*create_list(int *input, int count, int flag);
-t_stack_node	*sort_three(t_stack_node **stack_a);
+void	sort_three(t_stack_node **stack_a);
+void sort_four(t_stack_node **stack_a,t_stack_node **stack_b);
 t_stack_node	*find_max_b(t_stack_node **stack_b);
 t_stack_node	*find_min_b(t_stack_node **stack_b);
-t_stack_node	*cheapest_node(t_stack_node *stack_a, t_stack_node *stack_b,
-							int total_a, int total_b);
+t_stack_node	*cheapest_node(t_stack_node **stack_a, t_stack_node **stack_b,
+	int total_a, int total_b);
 
 # endif
