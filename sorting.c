@@ -165,7 +165,7 @@ void sort(t_stack_node **stack_a, t_stack_node **stack_b)
         total_b = count_nodes(*stack_b);
         pre_sort(stack_a, stack_b);
 		
-        cheap = cheapest_node(*stack_a, *stack_b, total_a, total_b);
+        cheap = cheapest_node(stack_a, stack_b, total_a, total_b);
 			if (cheap->median == 1 && cheap->target->median == 1)
 				rotate_a_b(stack_a, stack_b, cheap);
             else if (cheap->median == 0 && cheap->target->median == 0)
