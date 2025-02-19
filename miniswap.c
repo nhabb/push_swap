@@ -66,24 +66,10 @@ void put_min_on_top(t_stack_node **stack_a)
             rra(stack_a);
     }
 }
-
-
-void sort_four(t_stack_node **stack_a,t_stack_node **stack_b)
+void	sort_two_stack(t_stack_node **a)
 {
-	int nodes;
-	t_stack_node *cur;
-
-	cur = (*stack_a);
-	nodes = count_nodes(*stack_a);
-	if (nodes == 4)
-	{
-		cur->min = find_min_b(&cur);
-		put_min_on_top(&cur->min);
-		nodes--;
-	}
-	pb(&cur,stack_b);
-	sort_three(&cur);
-	pa(stack_a,stack_b);
+	if ((*a)->data > (*a)->next->data)
+		sa(a);
 }
 
 void	push_to_b(t_stack_node **stack_a, t_stack_node **stack_b)

@@ -58,31 +58,31 @@
 // 	// }	
 // 	// return (sign * result);
 // }
-bool new_atoi(const char *nptr, long long int *ftatoi)
-{
-    int i = 0;
-    int sign = 1;
-    long long int result = 0;
+// bool new_atoi(const char *nptr, long long int *ftatoi)
+// {
+//     int i = 0;
+//     int sign = 1;
+//     long long int result = 0;
 
-    if (nptr[i] == '-')
-    {
-	    sign *= -1;
-        i++;
-	}
-    if (nptr[i] == '\0' || nptr[i] == '+') // Invalid cases
-            return false;
-    while (nptr[i] >= '0' && nptr[i] <= '9')
-    {
-        result = result * 10 + (nptr[i] - '0');
-        if ((result * sign) < LLONG_MIN || (result * sign) > LLONG_MAX) // Overflow check
-            return false;
-        i++;
-    }
-    if (nptr[i] != '\0') // Ensure no extra invalid characters
-        return false;
-    *ftatoi = result * sign;
-    return true;
-}
+//     if (nptr[i] == '-')
+//     {
+// 	    sign *= -1;
+//         i++;
+// 	}
+//     if (nptr[i] == '\0' || nptr[i] == '+') // Invalid cases
+//             return false;
+//     while (nptr[i] >= '0' && nptr[i] <= '9')
+//     {
+//         result = result * 10 + (nptr[i] - '0');
+//         if ((result * sign) < LLONG_MIN || (result * sign) > LLONG_MAX) // Overflow check
+//             return false;
+//         i++;
+//     }
+//     if (nptr[i] != '\0') // Ensure no extra invalid characters
+//         return false;
+//     *ftatoi = result * sign;
+//     return true;
+// }
 
 t_stack_node	*find_max_b(t_stack_node **stack_b)
 {
@@ -144,6 +144,34 @@ void assign_indices(t_stack_node *stack)
         stack = stack->next;
         index++;
     }
+}
+char	*ft_strjoin_new(char *s1, char *s2)
+{
+	char	*result;
+	size_t	len1;
+	size_t	len2;
+	size_t	i;
+
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	result = malloc(len1 + len2 + 1);
+	if (!result)
+		return (NULL);
+	i = 0;
+	while (i < len1)
+	{
+		result[i] = s1[i];
+		i++;
+	}
+	i = 0;
+	while (i < len2)
+	{
+		result[len1 + i] = s2[i];
+		i++;
+	}
+	result[len1 + len2] = '\0';
+	free(s1);
+	return (result);
 }
 
 // int findPos(t_stack_node *node,t_stack_node **stack_a)

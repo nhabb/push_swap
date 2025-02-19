@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhaber <nhaber@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/02 13:36:02 by nhaber            #+#    #+#             */
-/*   Updated: 2024/09/02 13:36:02 by nhaber           ###   ########.fr       */
+/*   Created: 2025/02/18 22:05:50 by nhaber            #+#    #+#             */
+/*   Updated: 2025/02/18 22:05:50 by nhaber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "push_swap.h"
 
@@ -99,4 +101,21 @@ int	count_nodes(t_stack_node *stack_a)
 		count++;
 	}
 	return (count);
+}
+
+int	new_atoi(char *str)
+{
+	int				sign;
+	long long int	i;
+
+	sign = 1;
+	i = 0;
+	while (*str == 32 || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-' || *str == '+')
+		if (*str++ == '-')
+			sign *= -1;
+	while (*str)
+		i = i * 10 + (*str++ - '0');
+	return (i * sign);
 }

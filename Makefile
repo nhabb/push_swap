@@ -11,7 +11,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 PRINTF = $(PRINTF_DIR)/libftprintf.a
 
 # Source files
-SRCS = push.c swap.c utils.c utils2.c handle_errors.c rotate.c rev_rotate.c miniswap.c sorting.c cost.c sorting_helpers.c helper.c main.c
+SRCS = push.c swap.c utils.c utils2.c handle_errors.c rotate.c rev_rotate.c miniswap.c sort.c helper.c main.c pre_process.c process.c stack.c rotate_stacks.c utils3.c algorithm.c calculations.c
 
 # Object files
 OBJS = $(SRCS:.c=.o)
