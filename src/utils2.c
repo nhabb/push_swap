@@ -1,22 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhaber <nhaber@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/25 22:45:27 by nhaber            #+#    #+#             */
-/*   Updated: 2024/06/25 22:47:13 by nhaber           ###   ########.fr       */
+/*   Created: 2024/08/24 11:45:51 by nhaber            #+#    #+#             */
+/*   Updated: 2024/08/24 11:45:51 by nhaber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "push_swap.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+int	strcmp_max(char *max, char *num)
 {
-	if (!lst || !del)
-		return ;
-	if (lst->content)
-		del(lst->content);
-	free(lst);
+	int	lenmax;
+	int	lennum;
+
+	lenmax = ft_strlen(max);
+	lennum = ft_strlen(num);
+	if (lennum > lenmax)
+		return (0);
+	else if (lennum < lenmax)
+		return (1);
+	else
+	{
+		while (*max && *num)
+		{
+			if (*num > *max)
+				return (0);
+			else if (*num < *max)
+				return (1);
+			max++;
+			num++;
+		}
+	}
+	return (1);
 }
